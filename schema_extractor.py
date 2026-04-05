@@ -1,9 +1,9 @@
 import sqlite3
 
 class SchemaExtractor:
-      """
-    Extracts database schema (tables + columns) from a SQLite database.
-    Output is formatted as a string to provide context to the LLM for SQL generation.
+    """
+    Extracts database schema (tables and columns) from a SQLite database.
+    The output is formatted as a string to provide context to the LLM.
     """
 
     def __init__(self, db_path):
@@ -13,7 +13,6 @@ class SchemaExtractor:
         connection = sqlite3.connect(self.db_path)
         cursor = connection.cursor()
 
-        # Fetch all table names from SQLite system metadata
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
         tables = cursor.fetchall()
 
@@ -23,7 +22,6 @@ class SchemaExtractor:
             table_name = table[0]
             schema += f"Table: {table_name}\n"
 
-            # Get column details (name + datatype) for each table
             cursor.execute(f"PRAGMA table_info({table_name})")
             columns = cursor.fetchall()
 
@@ -36,8 +34,7 @@ class SchemaExtractor:
         return schema
 
 
-# Quick local test to verify schema extraction
-if __name__ == "__main__":
-    extractor = SchemaExtractor("chinook.db")
-    schema = extractor.get_schema()
-    print(schema)
+
+extractor = SchemaExtractor("chinook.db")
+schema = extractor.get_schema()
+print(schema)
