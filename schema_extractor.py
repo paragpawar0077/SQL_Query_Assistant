@@ -1,10 +1,7 @@
 import sqlite3
 
 class SchemaExtractor:
-    """
-    Extracts database schema (tables + columns) from a SQLite database.
-    Output is formatted as a string to provide context to the LLM for SQL generation.
-    """
+
 
     def __init__(self, db_path):
         self.db_path = db_path
