@@ -35,23 +35,23 @@ Rules:
         return response.text.strip()
 
 
-# Test it
+
 if __name__ == "__main__":
     from schema_extractor import SchemaExtractor
 
-    # Get real schema from Chinook
+    # Load database schema dynamically to ensure query accuracy
     extractor = SchemaExtractor("chinook.db")
     schema = extractor.get_schema()
 
-    # Generate SQL
+    # Initialize NL → SQL converter using Gemini
     nl2sql = NL2SQL()
-
+    # Sample test queries to validate SQL generation
     questions = [
         "Show me all customers from Brazil",
         "Which artist has the most albums?",
         "What are the top 5 most expensive tracks?"
     ]
-
+    # Generate SQL queries for each input question
     for question in questions:
         print(f"Question: {question}")
         sql = nl2sql.generate_sql(question, schema)
