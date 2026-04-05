@@ -37,7 +37,7 @@ no SQL knowledge needed.
 
 6. **Frontend (`app.py`)**  
    Streamlit displays results in a clean UI.
-
+```
 ## 📁 Project Structure
 
 sql-query-assistant/
@@ -52,6 +52,8 @@ sql-query-assistant/
 ├── .env                  # API keys (not uploaded to GitHub)
 ├── .gitignore            # Git ignore rules
 └── README.md             # Project documentation
+
+```
 
 ## Features
 - Natural language to SQL conversion
