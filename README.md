@@ -18,32 +18,40 @@ no SQL knowledge needed.
 - **Streamlit** — web interface
 - **Pandas** — data visualization
 
-## Project Architecture
+## 🏗️ Project Architecture
 
-User Question (English)
-↓
-schema_extractor.py  → reads DB structure
-↓
-nl2sql.py            → Gemini converts question to SQL
-↓
-db_executor.py       → executes SQL on Chinook DB
-↓
-answer_generator.py  → Gemini explains results in English
-↓
-app.py               → Streamlit web interface
+1. **User Input**  
+   User asks a question in plain English.
+
+2. **Schema Extraction (`schema_extractor.py`)**  
+   Reads database structure to understand tables & relationships.
+
+3. **NL → SQL (`nl2sql.py`)**  
+   Gemini API converts the question into an SQL query.
+
+4. **Execution (`db_executor.py`)**  
+   Runs the SQL query on the Chinook SQLite database.
+
+5. **Answer Generation (`answer_generator.py`)**  
+   Gemini converts query results into human-readable explanation.
+
+6. **Frontend (`app.py`)**  
+   Streamlit displays results in a clean UI.
 
 ## 📁 Project Structure
+
 sql-query-assistant/
-├── app.py                  # Streamlit web interface
-├── main.py                 # CLI version
-├── schema_extractor.py     # Reads database structure
-├── nl2sql.py               # Natural language → SQL (Gemini)
-├── db_executor.py          # Executes SQL queries
-├── answer_generator.py     # Results → Plain English (Gemini)
-├── requirements.txt        # Python dependencies
-├── .env                    # API keys (not uploaded to GitHub)
-├── .gitignore              # Git ignore rules
-└── README.md               # Project documentation
+│
+├── app.py                # Streamlit web interface
+├── main.py               # CLI version
+├── schema_extractor.py   # Reads database structure
+├── nl2sql.py             # Natural language → SQL (Gemini)
+├── db_executor.py        # Executes SQL queries
+├── answer_generator.py   # Results → Plain English (Gemini)
+├── requirements.txt      # Python dependencies
+├── .env                  # API keys (not uploaded to GitHub)
+├── .gitignore            # Git ignore rules
+└── README.md             # Project documentation
 
 ## Features
 - Natural language to SQL conversion
