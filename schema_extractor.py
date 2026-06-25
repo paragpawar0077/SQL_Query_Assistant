@@ -36,6 +36,6 @@ class SchemaExtractor:
 
 
 if __name__ == "__main__":
-    extractor = SchemaExtractor(...)
-schema = extractor.get_schema()
-print(schema)
+    extractor = SchemaExtractor("chinook.db")
+    schema = extractor.get_schema()
+    print(schema)
