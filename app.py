@@ -21,7 +21,9 @@ def load_modules():
 
 schema, nl2sql, executor, generator = load_modules()
 
-question = st.text_input("Ask a question:")
+with st.form(key="query_form", clear_on_submit=False):
+    question = st.text_input("Ask a question:")
+    submit_button = st.form_submit_button(label="Ask")
 
 def show_chart(results):
     """Render bar chart if result is (label, numeric value) format."""
@@ -34,7 +36,7 @@ def show_chart(results):
     st.subheader("📊 Chart")
     st.bar_chart(df.set_index("Label"))
 
-if st.button("Ask"):
+if submit_button:
     if not question:
         st.error("⚠️ Please enter a question!")
     else:
