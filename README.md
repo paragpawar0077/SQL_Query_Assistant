@@ -5,6 +5,8 @@ An AI-powered natural language to SQL query assistant built with Python, Google 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
 ![Gemini API](https://img.shields.io/badge/Gemini-2.5--flash--lite-orange)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED)
+![AWS EC2](https://img.shields.io/badge/AWS-EC2-FF9900)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
@@ -87,8 +89,8 @@ API quota errors (429) are caught separately and shown with a user-friendly mess
 ### Security
 API credentials stored in a `.env` file and loaded via `python-dotenv`. `.env` is excluded from version control via `.gitignore`.
 
-### Containerization
-A `Dockerfile` and `.Dockerignore` are included for containerized deployment.
+### Containerization & Deployment
+The app is packaged as a Docker image (`Dockerfile` + `.Dockerignore`) and deployed on an AWS EC2 instance, running the container behind the instance's public IP/port.
 
 ---
 
@@ -123,6 +125,7 @@ A `Dockerfile` and `.Dockerignore` are included for containerized deployment.
 | Pandas | Chart rendering |
 | python-dotenv | Environment variable management |
 | Docker | Containerized deployment |
+| AWS EC2 | Cloud hosting for the deployed container |
 
 ---
 
@@ -157,11 +160,31 @@ streamlit run app.py
 python main.py
 ```
 
-**Or run with Docker:**
+**Or run with Docker (locally):**
 ```bash
 docker build -t sql-query-assistant .
 docker run -p 8501:8501 --env-file .env sql-query-assistant
 ```
+
+---
+
+## Deployment (AWS EC2)
+
+The app is containerized and deployed on an AWS EC2 instance:
+
+```bash
+# On the EC2 instance
+git clone https://github.com/paragpawar0077/SQL_Query_Assistant
+cd SQL_Query_Assistant
+
+# Build the image
+docker build -t sql-query-assistant .
+
+# Run the container (mount your .env with the Gemini API key)
+docker run -d -p 8501:8501 --env-file .env --restart unless-stopped sql-query-assistant
+```
+
+Make sure the EC2 security group allows inbound traffic on port `8501` (or whichever port you expose) so the Streamlit app is reachable from the browser.
 
 ---
 
@@ -175,6 +198,7 @@ docker run -p 8501:8501 --env-file .env sql-query-assistant
 - Separate error handling for API quota limits
 - Modular architecture — each component independently testable
 - Docker support for containerized deployment
+- Deployed and running on AWS EC2
 
 ---
 
